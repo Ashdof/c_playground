@@ -8,6 +8,9 @@ The C Language was created by [Dennis Ritchie](https://en.wikipedia.org/wiki/Den
 
 Having falling in love with its simplicity and efficiency in execution, I'm determined to master this programming language and use it to create solutions to solve the most complex and challenging problems facing humanity.
 
+## Technology
+The source files were ran with `betty` for standards compliance and compiled with `-Wall -pedantic -Werror -Wextra -std=gnu89`
+
 ## Resources
 
 The codes in this repository are my attempt at the questions in the book co-authored by the creator of the language:
