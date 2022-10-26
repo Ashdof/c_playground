@@ -1,4 +1,4 @@
-#C Playground
+# C Playground
 
 C is a general purpose programming language useful in writing compilers and operating systems. It is a low level language that allows the programmer to explore his creativity. The language does not provide any operation to deal with composite objects, nor does it define any storage allocation facility. There is no heap or garbage collection; no input and out facilities; no read and write statements and no builtin file access methods. All of these higher-level mechanisms must be provided by explicitly-called functions. Hence the language retains the philosophy that programmers know what they are doing.
 
