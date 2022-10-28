@@ -1,11 +1,6 @@
 #include <stdio.h>
 
-#define LOWER 0
-#define UPPER 300
-#define STEP 20
-
-float celsius(float fahr);
-float fahrenheit(float cels);
+void tempConversion(char type, float lower, float upper, float step);
 
 /**
  * main - teperature conversion program
@@ -15,51 +10,73 @@ float fahrenheit(float cels);
 
 int main(void)
 {
-	int cels;
+	char c;
+	float start, end, step;
 
-	printf("%3s %6s\n", "Cels", "Fahrs");
-	for (cels = LOWER; cels <= UPPER; cels += STEP)
+	while ((c = getchar()) != EOF)
 	{
-		printf("%3d %6.2f\n", cels, fahrenheit(cels));
+		if (c == 'c' || c == 'C' || c == 'F' || c == 'f')
+		{
+			printf("Start value: ");
+			scanf("%f", &start);
+
+			printf("End value: ");
+			scanf("%f", &end);
+
+			printf("Step value: ");
+			scanf("%f", &step);
+
+			tempConversion(c, start, end, step);
+			break;
+		}
+		else
+		{
+			printf("Enter C/c for degree celsius or F/f for fahrenheit\n");
+		}
 	}
 
 	return (0);
 }
 
 /**
- * celsius - converts to celsius
- * @fahr: value in fahrenheit
+ * tempConversion - convert temperature values
+ * @type: type of conversion which is denoted by a character, c
+ * for celsius and f for fahrenheit
+ * @lower: the start value
+ * @upper: the ending value
+ * @step: the step interval for the conversion
  *
- * Description: this program converts a given fahrenheit value
- * to degree celsius
+ * Description: this function converts temperature value from either
+ * degree celsius to fahrenheit or the other way around depending on
+ * values provided.
  *
- * Return: the converted celsius value
+ * Return: nothing
  */
 
-float celsius(float fahr)
+void tempConversion(char type, float lower, float upper, float step)
 {
-	float c;
+	float value, temps;
 
-	c = (5.0 / 9.0) * (fahr - 32);
+	if (type == 'c' || type == 'C')
+	{
+		printf("%3s     %10s\n", "\nFahrenheit", "Celsius");
 
-	return (c);
-}
-
-/**
- * fahrenheit - converts to fahrenheit
- * @cels: value in degree celsius
- *
- * Description: this program converts a given celsius value to
- * fahrenheits
- *
- * Return: the converted fahrenheit value
- */
-
-float fahrenheit(float cels)
-{
-	float fahr;
-
-	fahr = (9 / 5) * (cels + 32);
-
-	return (fahr);
+		for (value = lower; value <= upper; value += step)
+		{
+			/* convert to degree celsius */
+			temps = (5.0 / 9.0) * (value - 32);
+			printf("%3.2f     %10.2f\n", value, temps);
+		}
+	}
+	else if (type == 'f' || type == 'F')
+	{
+		printf("%3s     %10s\n", "\nCelsius", "Fahrenheit");
+		
+		for (value = lower; value <= upper; value += step)
+		{
+			/* convert to fahrenheit */
+			temps = (9 / 5) * (value + 32);
+			printf("%3.2f %10.2f\n", value, temps);
+		}
+	}
 }
