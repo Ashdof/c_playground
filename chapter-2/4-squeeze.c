@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define MAXLINE 100	/* maximum length of line */
+#define MAXLINE 1000	/* maximum length of line */
 
 void squeeze(char s1[], char s2[]);
 int getlines(char s[], int lim);
@@ -56,6 +56,9 @@ int getlines(char line[], int lim)
 		++i;
 	}
 
+	if (c == '\n')
+		line[i] = c;
+
 	line[i] = '\0';
 
 	return (i);
@@ -76,14 +79,16 @@ void squeeze(char s1[], char s2[])
 {
 	int i, j, k;
 
-	i = 0;
-	j = 0;
+	i = j = 0;
 
 	while (s1[i] != '\0')
 	{
 		/* mark characters that appear in both strings */
 		for (k = 0; (s1[i] != s2[k]) && s2[k] != '\0'; k++)
-			;
+		{
+			if (s2[k] == ' ')
+				continue;
+		}
 		/* copy unmarked characters in s1 to a new index position */
 		if (s2[k] == '\0')
 			s1[j++] = s1[i];
