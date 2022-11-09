@@ -62,7 +62,7 @@ int getlines(char line[])
  * tabs into visible escape sequences line '\n' and '\t' as it copies
  * string src to dest.
  *
- * Return: void
+ * Return: the new string
  */
 
 int escape(char dest[], char src[])
@@ -83,6 +83,41 @@ int escape(char dest[], char src[])
 				dest[j] = '\\';
 				++j;
 				dest[j] = 'n';
+				break;
+			case '\a':
+				dest[j] = '\\';
+				++j;
+				dest[j] = 'a';
+				break;
+			case '\b':
+				dest[j] = '\\';
+				++j;
+				dest[j] = 'a';
+				break;
+			case '\r':
+				dest[j] = '\\';
+				++j;
+				dest[j] = 'r';
+				break;
+			case '\v':
+				dest[j] = '\\';
+				++j;
+				dest[j] = 'v';
+				break;
+			case '\\':
+				dest[j] = '\\';
+				++j;
+				dest[j] = '\\';
+				break;
+			case '\?':
+				dest[j] = '\\';
+				++j;
+				dest[j] = '?';
+				break;
+			case '\"':
+				dest[j] = '\\';
+				++j;
+				dest[j] = '"';
 				break;
 			default:
 				dest[j] = src[i];
