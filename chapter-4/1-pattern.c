@@ -34,21 +34,26 @@ int main(void)
  * Description: this function searches for a pattern from the
  * rightmost end of the string
  *
- * Return: the index where where the pattern is found in the line
+ * Return: the index where the pattern is found in the line
  * or -1 if none
  */
 
 int strrindex(char src[], char searchfor[])
 {
-	int i, j, k, r = -1;	
+	int i, j, k, r;
+       
+	r = -1;
+	i = 0;	
 
-	for (i = 0; src[i] != '\0'; i++)
+	while (src[i] != '\0')
 	{
 		for (j = i, k = 0; searchfor[k] != '\0' && src[j] == searchfor[k]; j++, k++)
 			;
 
 		if (k > 0 && searchfor[k] != '\0')
 			r = i;
+
+		i++;
 	}
 
 	return (r);
