@@ -6,5 +6,5 @@ The files in this repository are lessons in data structures and algorithms in th
 
 The online resources used for these lessons are:
 
-- [Techi Delight </>](https://www.techiedelight.com/introduction-linked-lists/)
+- [Techie Delight </>](https://www.techiedelight.com/introduction-linked-lists/)
 
