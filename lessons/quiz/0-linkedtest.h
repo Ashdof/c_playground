@@ -14,9 +14,8 @@
 
 struct StudentData
 {
-	char *firstName;
-	char *lastName;
-	int age;
+	char firstName[30];
+	char lastName[30];
 };
 
 
@@ -29,9 +28,9 @@ struct StudentData
 
 struct ExamData
 {
-	char *examDate;
+	char examDate[30];
 	int termNumber;
-	char *subject;
+	char subject[30];
 	int score;
 };
 

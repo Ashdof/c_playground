@@ -1,7 +1,7 @@
 #include "0-linkedtest.h"
 
-void push(struct Records, struct StudentData studentData, struct ExamData examData);
-struct Records *constructLinkedList(struct Records, int);
+void push(struct Records **head, struct StudentData pupil, struct ExamData exams);
+struct Records *constructLinkedList(struct Records values, int number);
 void printLinkedList(struct Records *head);
 
 
@@ -16,15 +16,29 @@ void printLinkedList(struct Records *head);
 
 int main(void)
 {
-	struct Student studentData = {"Jay", "Kay", 13};
-	struct ExamData examData = {"10-Dec-2022", "Mathematics", 75};
 	struct Records records, *head;
-	int i, num;
+	int i = 1;
 
-	num = 2;
+	/** supply data */
+	printf("First name: ");
+	scanf("%s", records.studentData.firstName);
 
-	records = {studentData, examData};
-	head = constructLinkedList(records, num);
+	printf("Last name: ");
+	scanf("%s", records.studentData.lastName);
+
+	printf("Exam date: ");
+	scanf("%s", records.examData.examDate);
+
+	printf("Term: ");
+	scanf("%d", &records.examData.termNumber);
+
+	printf("Subject: ");
+	scanf("%s", records.examData.subject);
+
+	printf("Score: ");
+	scanf("%d", &records.examData.score);
+
+	head = constructLinkedList(records, i);
 
 	printLinkedList(head);
 
@@ -68,14 +82,14 @@ void push(struct Records **head, struct StudentData pupil, struct ExamData exams
  * Return: a reference to the head of the linked list
  */
 
-struct Records *constructLinkedList(struct Records values[], int number)
+struct Records *constructLinkedList(struct Records values, int number)
 {
 	struct Records *head = NULL;
 	int i;
 
 	/** start from the end of the array */
 	for (i = number - 1; i >= 0; i--)
-		push(&head, values[i]);
+		push(&head, values.studentData, values.examData);
 
 	return (head);
 }
@@ -94,17 +108,17 @@ struct Records *constructLinkedList(struct Records values[], int number)
 void printLinkedList(struct Records *head)
 {
 	struct Records *ptr = head;
+	int i;
 
-	while (ptr)
+	for (i = 0; head != NULL; i++)
 	{
-		printf("Student:\n");
-		printf("Student name: %s %s\n", ptr->studentData->firstName, ptr->studentData->lastName);
+		printf("\nStudent name: %s %s\n", ptr->studentData.firstName, ptr->studentData.lastName);
+		printf("Examination date: %s\n", ptr->examData.examDate);
+		printf("Term number: %d\n", ptr->examData.termNumber);
+		printf("Examination paper: %s\n", ptr->examData.subject);
+		printf("Examination score: %d\n", ptr->examData.score);
 
-		printf("\nExamination:\n");
-		printf("Examination date: %s\n", ptr->examData->examDate);
-		printf("Term number: %d\n", ptr->examData->termNumber);
-		printf("Examination paper: %s\n", ptr->examData->subject);
-		printf("Examination score: %d\n", ptr->examData->score);
+		head = head->next;
 	}
 
 	printf("End of records\n");
