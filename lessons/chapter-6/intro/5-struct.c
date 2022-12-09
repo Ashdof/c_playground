@@ -9,21 +9,33 @@ struct StudentData
 	int age;
 };
 
+/** define address struct */
+struct Address
+{
+	char country[30];
+	char city[30];
+	char street[30];
+	char postalAddress[30];
+	char phone[15];
+	char email[20];
+};
+
 
 /** define employee struct */
 struct Employee
 {
-	float salary;
-	int age;
 	char fullName[30];
 	char profession[30];
+	int age;
+	struct Address address;
+	float salary;
 };
 
 int main(void)
 {
-	struct Employee employee[2];
-	int i;
+	struct Employee employee;
 
+	/**
 	for (i = 0; i < 2; i++)
 	{
 
@@ -48,8 +60,8 @@ int main(void)
 		printf("Age: %d\n", employee[i].age);
 		printf("Salary: %3.2f\n", employee[i].salary);
 	}
-
-	/*
+	*/
+	
 	printf("Full name: ");
 	scanf("%s", employee.fullName);
 
@@ -62,27 +74,31 @@ int main(void)
 	printf("Salary: ");
 	scanf("%f", &(employee.salary));
 
-	struct StudentData studentData;
+	printf("Country: ");
+	scanf("%s", employee.address.country);
 
-	printf("First name: ");
-	scanf("%s", studentData.firstName);
+	printf("City: ");
+	scanf("%s", employee.address.city);
 
-	printf("Last name: ");
-	scanf("%s", studentData.lastName);
+	printf("Postal address: ");
+	scanf("%s", employee.address.postalAddress);
 
-	printf("Student age: ");
-	scanf("%d", &studentData.age);
+	printf("Phone number: ");
+	scanf("%s", employee.address.phone);
 
-	strcpy(studentData.firstName, "Jay");
-	strcpy(studentData.lastName, "Kay");
-	studentData.age = 15;
+	printf("Email address: ");
+	scanf("%s", employee.address.email);
 
 	printf("\nEmployee Data:\n");
 	printf("Full name: %s\n", employee.fullName);
 	printf("Profession: %s\n", employee.profession);
 	printf("Age: %d\n", employee.age);
 	printf("Salary: %3.2f\n", employee.salary);
-	*/
+	printf("Country: %s\n", employee.address.country);
+	printf("City: %s\n", employee.address.city);
+	printf("Postal address: %s\n", employee.address.postalAddress);
+	printf("Phone number: %s\n", employee.address.phone);
+	printf("Email address: %s\n", employee.address.email);
 
 	return (0);
 }
