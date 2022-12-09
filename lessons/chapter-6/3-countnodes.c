@@ -1,6 +1,8 @@
 #include "lists.h"
 
-void push(struct Years **head, int yr, int qtyPurchased, int qtySold);
+void push(struct Records **head, int yr);
+struct Records *makeLinkedList(int values[], int number);
+void printLinkedList(struct Records *head);
 
 /**
  * push - create a new node with a link
@@ -13,14 +15,12 @@ void push(struct Years **head, int yr, int qtyPurchased, int qtySold);
  * Return: void
  */
 
-void push(struct Years **head, int yr, int qtyPurchased, int qtySold)
+void push(struct Records **head, int yr)
 {
 	/** allocate memory */
-	struct Years *newNode = malloc(sizeof(struct Years));
+	struct Records *newNode = malloc(sizeof(struct Records));
 
 	newNode->year = yr;
-	newNode->quantityPurchased = qtyPurchased;
-	newNode->quantitySold = qtySold;
 
 	newNode->next = *head;
 	*head = newNode;
@@ -38,13 +38,38 @@ void push(struct Years **head, int yr, int qtyPurchased, int qtySold)
  * Return: a reference to the head of the linked list
  */
 
-struct Years *makeLinkedList(int values[], int number)
+struct Records *makeLinkedList(int values[], int number)
 {
-	struct Years *head = NULL;
+	struct Records *head = NULL;
 	int i;
 
 	for (i = number - 1; i >= 0; i--)
 		push(&head, values[i]);
 
 	return (head);
+}
+
+
+/**
+ * printLinkedList - print a linked list
+ * @head: a reference to the head of the linked list
+ *
+ * Description: this function prints the contents of a linked
+ * list
+ *
+ * Return: void
+ */
+
+void printLinkedList(struct Records *head)
+{
+	struct Records *ptr = head;
+	int i;
+
+	for (i = 0; head != NULL; i++)
+	{
+		printf("%d -> ", ptr->year);
+		head = head->next;
+	}
+
+	print("End of records\n");
 }

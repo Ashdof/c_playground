@@ -6,12 +6,10 @@
 
 /** define a struct */
 
-struct Years
+struct Records
 {
 	int year;
-	int quantityPurchased;
-	int quantitySold;
-	struct Years *next;
+	struct Records *next;
 };
 
 #endif /* LIST_H */
