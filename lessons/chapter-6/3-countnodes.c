@@ -29,6 +29,8 @@ int main(void)
 
 	printLinkedList(head);
 
+	free(head);
+
 	return (0);
 }
 
@@ -101,7 +103,7 @@ void printLinkedList(struct Records *head)
 		head = head->next;
 	}
 
-	print("\nEnd of records\n");
+	printf("NULL\n");
 }
 
 
@@ -118,17 +120,12 @@ void printLinkedList(struct Records *head)
 
 int countNodes(struct Records *head)
 {
-	int count;
-	struct Records *ptr = NULL;
+	int count = 0;
 
-	if (head == NULL)
-		return (0);
-
-	ptr = head;
-	while (ptr)
+	while (head)
 	{
 		count++;
-		ptr = ptr->next;
+		head = head->next;
 	}
 
 	return (count);
