@@ -4,7 +4,7 @@
 /**
  * Node - a node structure
  *
- * Description: this is a data structure to store a linked list node
+ * Description: this is a data structure to be used to create a node
  */
 
 struct Node
@@ -13,8 +13,9 @@ struct Node
 	struct Node *next;
 };
 
+
 /**
- * push - create a new link with the data
+ * push - create a new node and a link with the data
  * @headRef: reference pointer to the head of the linked list
  * @value: the data to store in the node
  *
@@ -42,6 +43,7 @@ void push(struct Node **headRef, int value)
 	*headRef = newNode;
 }
 
+
 /**
  * constructList - create a linked list
  * @key: an array of data to construct the link list
@@ -49,8 +51,8 @@ void push(struct Node **headRef, int value)
  *
  * Description: this function creates a linked list with the
  * data in the array. It creates nodes to the number specified
- * by 'n'. It uses the nodes created by 'push()' function and creates
- * a link to the next node
+ * by 'n'. It uses the nodes created by 'push()' function and
+ * connects the links to create the linked list
  *
  * Return: a reference to the head of the linked list
  */
@@ -60,6 +62,7 @@ struct Node *constructList(int keys[], int n)
 	struct Node *head = NULL;
 	int i;
 
+	/** start from the last element in the array */
 	for (i = n - 1; i >= 0; i--)
 		push(&head, keys[i]);
 
@@ -104,8 +107,6 @@ int main(void)
 
 	/** print the linked list */
 	printList(head);
-
-	/*printf("Value of num: sizeof(events) / sizeof(events[0]) - %d\n", num);*/
 
 	return (0);
 }
