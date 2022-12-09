@@ -5,6 +5,34 @@ struct Records *makeLinkedList(int values[], int number);
 void printLinkedList(struct Records *head);
 int countNodes(struct Records *head);
 
+
+/**
+ * main - the starting point for programme execution
+ *
+ * Return: void
+ */
+
+int main(void)
+{
+	int years[] = {1990, 1995, 2000, 2005, 2010};
+	int i = sizeof(years) / sizeof(years[0]);
+	int nodes;
+	struct Records *head;
+
+	head = makeLinkedList(years, i);
+	nodes = countNodes(head);
+
+	if (nodes == 0)
+		printf("Linked list is empty");
+	else
+		printf("Number of nodes: %d\n", nodes);
+
+	printLinkedList(head);
+
+	return (0);
+}
+
+
 /**
  * push - create a new node with a link
  * @head: a reference pointer to the node
@@ -65,14 +93,15 @@ void printLinkedList(struct Records *head)
 {
 	struct Records *ptr = head;
 	int i;
-
+	
+	printf("\nData in the linked list nodes\n");
 	for (i = 0; head != NULL; i++)
 	{
 		printf("%d -> ", ptr->year);
 		head = head->next;
 	}
 
-	print("End of records\n");
+	print("\nEnd of records\n");
 }
 
 
