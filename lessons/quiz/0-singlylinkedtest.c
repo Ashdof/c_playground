@@ -1,9 +1,35 @@
-#include "4-main.c"
+#include "0-linkedtest.h"
 
 void push(struct Records, struct StudentData studentData, struct ExamData examData);
 struct Records *constructLinkedList(struct Records, int);
 void printLinkedList(struct Records *head);
 
+
+/**
+ * main - the main function
+ *
+ * Description: this function is the starting point for the
+ * execution of the programme
+ *
+ * Return: void
+ */
+
+int main(void)
+{
+	struct Student studentData = {"Jay", "Kay", 13};
+	struct ExamData examData = {"10-Dec-2022", "Mathematics", 75};
+	struct Records records, *head;
+	int i, num;
+
+	num = 2;
+
+	records = {studentData, examData};
+	head = constructLinkedList(records, num);
+
+	printLinkedList(head);
+
+	return (0);
+}
 
 /**
  * push - create a node
@@ -72,9 +98,7 @@ void printLinkedList(struct Records *head)
 	while (ptr)
 	{
 		printf("Student:\n");
-		printf("First name: %s\n", ptr->studentData->firstName);
-		printf("Last name: %s\n", ptr->studentData->lastName);
-		printf("Student age: %d\n", ptr->studentData->age);
+		printf("Student name: %s %s\n", ptr->studentData->firstName, ptr->studentData->lastName);
 
 		printf("\nExamination:\n");
 		printf("Examination date: %s\n", ptr->examData->examDate);
