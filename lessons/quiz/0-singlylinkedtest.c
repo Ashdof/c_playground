@@ -2,6 +2,7 @@
 
 void push(struct Records, struct StudentData studentData, struct ExamData examData);
 struct Records *constructLinkedList(struct Records, int);
+void printLinkedList(struct Records *head);
 
 
 /**
@@ -51,4 +52,36 @@ struct Records *constructLinkedList(struct Records values[], int number)
 		push(&head, values[i]);
 
 	return (head);
+}
+
+
+/**
+ * printLinkedList - print the contents of a linked list
+ * @head: a reference to the head of the linked list
+ *
+ * Description: this function is passed a pointer to the head of
+ * the linked list. It then prints the nodes of the list.
+ *
+ * Return: void
+ */
+
+void printLinkedList(struct Records *head)
+{
+	struct Records *ptr = head;
+
+	while (ptr)
+	{
+		printf("Student:\n");
+		printf("First name: %s\n", ptr->studentData->firstName);
+		printf("Last name: %s\n", ptr->studentData->lastName);
+		printf("Student age: %d\n", ptr->studentData->age);
+
+		printf("\nExamination:\n");
+		printf("Examination date: %s\n", ptr->examData->examDate);
+		printf("Term number: %d\n", ptr->examData->termNumber);
+		printf("Examination paper: %s\n", ptr->examData->subject);
+		printf("Examination score: %d\n", ptr->examData->score);
+	}
+
+	printf("End of records\n");
 }
