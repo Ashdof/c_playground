@@ -8,7 +8,8 @@
  * StudentData - struct of student data
  *
  * Description: this structure is used to handle data about each
- * candidate of the examination
+ * candidate of the examination and is stored as data in the
+ * 'Records' node
  */
 
 struct StudentData
@@ -23,6 +24,7 @@ struct StudentData
  * ExamData - struct of examination data
  *
  * Description: this struct is used to handle data about examination
+ * and is stored as data in the 'Records' node
  */
 
 struct ExamData
@@ -38,7 +40,8 @@ struct ExamData
  * Records - struct of records
  *
  * Description: this struct combines data about students and
- * examination and store them
+ * examination and store them. This struct is used to create
+ * nodes for the linked list.
  */
 
 struct Records
