@@ -3,6 +3,7 @@
 void push(struct Records **head, int yr);
 struct Records *makeLinkedList(int values[], int number);
 void printLinkedList(struct Records *head);
+int countNodes(struct Records *head);
 
 /**
  * push - create a new node with a link
@@ -72,4 +73,34 @@ void printLinkedList(struct Records *head)
 	}
 
 	print("End of records\n");
+}
+
+
+/**
+ * countNodes - count the number of nodes
+ * @head: a reference to the head of the node
+ *
+ * Description: this function counts for the number of
+ * nodes in the linked list
+ *
+ * Return: the number of nodes or negative 0 if the list is 
+ * empty
+ */
+
+int countNodes(struct Records *head)
+{
+	int count;
+	struct Records *ptr = NULL;
+
+	if (head == NULL)
+		return (0);
+
+	ptr = head;
+	while (ptr)
+	{
+		count++;
+		ptr = ptr->next;
+	}
+
+	return (count);
 }
