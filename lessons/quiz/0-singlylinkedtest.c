@@ -72,12 +72,17 @@ void push(struct Records **head, struct StudentData pupil, struct ExamData exams
 
 /**
  * constructLinkedList - construct a linked list
- * @values: an array of type struct Records
+ * @values: data of type struct Records
  * @number: the number of records
  *
  * Description: this struct is a function that constructs a linked
- * list. It is passed an array of data of type struct and a number
- * which determines the number of nodes to create for the linked list
+ * list. It is passed data of type struct Records. The Records struct
+ * is a complex struct involving the StudentData and the ExamData
+ * structs. Each of these structs have data of their respective
+ * subjects. The structs are accessed using the dot operator. This
+ * function is also passed an integer value, number which is used to
+ * determine the number of nodes to create for the linked list. Each
+ * node, therefore is a struct of type StudentData and ExamData
  *
  * Return: a reference to the head of the linked list
  */
@@ -100,7 +105,8 @@ struct Records *constructLinkedList(struct Records values, int number)
  * @head: a reference to the head of the linked list
  *
  * Description: this function is passed a pointer to the head of
- * the linked list. It then prints the nodes of the list.
+ * the linked list. It then traverses and prints the contents of
+ * the contents of the nodes of the list.
  *
  * Return: void
  */
