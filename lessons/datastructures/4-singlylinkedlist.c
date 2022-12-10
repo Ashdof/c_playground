@@ -11,9 +11,40 @@ void addNodeAtEnd(struct Node *head, int value);
 void printLinkedList(struct Node *head);
 struct Node *constructList(int keys[], int n);
 void push(struct Node **headRef, int value);
+struct Node *addNewNodeAtEnd(struct Node *ptr, int value);
 
 int main(void)
 {
+	struct Node *head;
+	struct Node *ptr;
+	int dateData, i = 0;
+
+	head = malloc(sizeof(struct Node));
+	head->data = 1980;
+	head->next = NULL;
+
+	ptr = head;
+
+	ptr = addNewNodeAtEnd(ptr, 1985);
+	ptr = addNewNodeAtEnd(ptr, 1990);
+	ptr = addNewNodeAtEnd(ptr, 1995);
+	ptr = addNewNodeAtEnd(ptr, 2000);
+	ptr = addNewNodeAtEnd(ptr, 2005);
+	ptr = addNewNodeAtEnd(ptr, 2010);
+	ptr = addNewNodeAtEnd(ptr, 2015);
+	ptr = addNewNodeAtEnd(ptr, 2020);
+
+	ptr = head;
+
+	while (ptr != NULL)
+	{
+		printf("%d -> ", ptr->data);
+		ptr = ptr->next;
+	}
+
+	printf("NULL\n");
+
+	/**
 	int values[] = {1990, 1995, 2000, 2005, 2010};
 	int num = sizeof(values) / sizeof(values[0]);
 
@@ -23,11 +54,12 @@ int main(void)
 	scanf("%d", &newVal);
 
 	struct Node *head = constructList(values, num);
-	
 	addNodeAtEnd(head, newVal);
-	printLinkedList(head);
+	
+	printLinkedList(ptr);
+	*/
 
-	free(head);
+	free(ptr);
 
 	return (0);
 }
@@ -93,4 +125,16 @@ void addNodeAtEnd(struct Node *head, int value)
 		ptr = ptr->next;
 
 	ptr->next = temp;
+}
+
+/** insert a new node at the end, version 2 */
+struct Node *addNewNodeAtEnd(struct Node *ptr, int value)
+{
+	struct Node *temp = malloc(sizeof(struct Node));
+	temp->data = value;
+	temp->next = NULL;
+
+	ptr->next = temp;
+
+	return (ptr);
 }
