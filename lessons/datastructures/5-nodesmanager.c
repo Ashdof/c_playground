@@ -80,7 +80,7 @@ struct DuesPayments *constructLinkedList(struct DuesPayments values, int number)
 
 
 /** add a new node at the end of the linked list */
-struct DuesPayments *addNewNodeAtEnd(struct DuesPayments *head, struct DuesPayments values)
+void addNewNodeAtEnd(struct DuesPayments *head, struct DuesPayments values)
 {
 	struct DuesPayments *newNode = malloc(sizeof(struct DuesPayments));
 
@@ -90,6 +90,4 @@ struct DuesPayments *addNewNodeAtEnd(struct DuesPayments *head, struct DuesPayme
 	newNode->next = NULL;
 
 	head->next = newNode;
-
-	return (head);
 }

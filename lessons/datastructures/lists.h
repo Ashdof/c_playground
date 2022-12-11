@@ -14,10 +14,9 @@ struct DuesPayments
 };
 
 void push(struct DuesPayments **head, char datePaid[], char clientName[], float amountPaid);
-struct DuesPayments *addNodeAtEnd(struct DuesPayments *head, struct DuesPayments values);
 int countNodes(struct DuesPayments *head);
 void printLinkedList(struct DuesPayments *head, int numberOfNodes);
 struct DuesPayments *constructLinkedList(struct DuesPayments values, int number);
-struct DuesPayments *addNewNodeAtEnd(struct DuesPayments *head, struct DuesPayments values);
+void addNewNodeAtEnd(struct DuesPayments *head, struct DuesPayments values);
 
 #endif /* LISTS_H */
