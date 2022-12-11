@@ -13,7 +13,7 @@ struct DuesPayments
 void push(struct DuesPayments **head, char datePaid[], char clientName[], float amountPaid);
 struct DuesPayments *addNodeAtEnd(struct DuesPayments *head, struct DuesPayments values);
 int countNodes(struct DuesPayments *head);
-void printLinkedList(struct DuesPayments *head);
+void printLinkedList(struct DuesPayments *head, int numberOfNodes);
 struct DuesPayments *constructLinkedList(struct DuesPayments values, int number);
 
 
@@ -22,6 +22,7 @@ struct DuesPayments *constructLinkedList(struct DuesPayments values, int number)
 int main(void)
 {
 	struct DuesPayments *head, records;
+	int nodes;
 
 	printf("Date: ");
 	scanf("%s", records.date);
@@ -34,9 +35,10 @@ int main(void)
 
 	/* make new node */
 	head = constructLinkedList(records, 1);
+	nodes = countNodes(head);
 
 	/* print linked list */
-	printLinkedList(head);
+	printLinkedList(head, nodes);
 
 	free(head);
 
@@ -89,7 +91,7 @@ int countNodes(struct DuesPayments *head)
 
 
 /** print data in all nodes */
-void printLinkedList(struct DuesPayments *head)
+void printLinkedList(struct DuesPayments *head, int numberOfNodes)
 {
 	struct DuesPayments *ptr = head;
 	int i;
@@ -103,7 +105,9 @@ void printLinkedList(struct DuesPayments *head)
 		head = head->next;
 	}
 
-	printf("End of records\n");
+	printf("\nNumber of records: %d\n", numberOfNodes);
+
+	printf("\nEnd of records\n");
 }
 
 
