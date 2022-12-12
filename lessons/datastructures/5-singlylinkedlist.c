@@ -31,7 +31,7 @@ int main(void)
 	scanf("%f", &records.amount);
 
 	/* add new node */
-	addNewNodeAtEnd(head, records);
+	addNewNodeAtEnd(&head, records);
 
 	/* count nodes */
 	nodes = countNodes(head);
