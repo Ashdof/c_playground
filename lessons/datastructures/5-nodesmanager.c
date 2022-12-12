@@ -15,16 +15,31 @@ void push(struct DuesPayments **head, char datePaid[], char clientName[], float 
 
 
 /** Add a new node at end of list */
-struct DuesPayments *addNodeAtEnd(struct DuesPayments *head, struct DuesPayments values)
+struct DuesPayments *addNewNodeAtEnd(struct DuesPayments **head, struct DuesPayments values)
 {
-	struct DuesPayments *temp = malloc(sizeof(struct DuesPayments));
+	struct DuesPayments *new, *temp;
+       
+	new = *head;
+	
+	*temp = malloc(sizeof(struct DuesPayments));
+	if (!temp)
+		return (NULL);
 
 	strcpy(temp->date, values.date);
 	strcpy(temp->client, values.client);
 	temp->amount = values.amount;
 	temp->next = NULL;
 
-	head->next = temp;
+	if (*head == NULL)
+	{
+		head->next = temp;
+		return (temp);
+	}
+
+	while (new->next)
+		new = new->next;
+
+	new->next = temp;
 
 	return (temp);
 }
@@ -76,18 +91,4 @@ struct DuesPayments *constructLinkedList(struct DuesPayments values, int number)
 		push(&head, values.date, values.client, values.amount);
 
 	return (head);
-}
-
-
-/** add a new node at the end of the linked list */
-void addNewNodeAtEnd(struct DuesPayments *head, struct DuesPayments values)
-{
-	struct DuesPayments *newNode = malloc(sizeof(struct DuesPayments));
-
-	strcpy(newNode->date, values.date);
-	strcpy(newNode->client, values.client);
-	newNode->amount = values.amount;
-	newNode->next = NULL;
-
-	head->next = newNode;
 }
