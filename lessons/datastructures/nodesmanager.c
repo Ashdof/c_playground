@@ -76,6 +76,34 @@ void addNodeAtBeginning(struct DuesPayments **head, struct DuesPayments values)
 }
 
 
+/** add a new node at a given index position */
+void addNodeAtGivenIndex(struct DuesPayments *head, struct DuesPayments values, int index)
+{
+	struct DUesPayments *newNode, *ptr;
+
+	newNode = malloc(sizeof(struct DuesPayments));
+	strcpy(newNode->date, values.date);
+	strcpy(newNode->client, values.client);
+	newNode->amount = values.amount;
+	newNode->next = NULL;
+
+	if (index == 0)
+	{
+		newNode->next = *head;
+		*head = newNode;
+	}
+
+	index--;
+	while (index != 1)
+	{
+		ptr = ptr->next;
+		index--;
+	}
+
+	newNode = ptr->next;
+	ptr->next = newNode;
+}
+
 /** Count nodes */
 int countNodes(struct DuesPayments *head)
 {
