@@ -18,5 +18,6 @@ void printLinkedList(struct DuesPayments *head, int numberOfNodes);
 struct DuesPayments *constructLinkedList(struct DuesPayments values, int number);
 void push(struct DuesPayments **head, char datePaid[], char clientName[], float amountPaid);
 struct DuesPayments *addNewNodeAtEnd(struct DuesPayments **head, struct DuesPayments values);
+struct DuesPayments *addNewNodeAtBeginning(struct DuesPayments *head, struct DuesPayments values);
 
 #endif /* LISTS_H */

@@ -45,6 +45,22 @@ struct DuesPayments *addNewNodeAtEnd(struct DuesPayments **head, struct DuesPaym
 }
 
 
+/** add a new node at the beginning of a linked list */
+struct DuesPayments *addNewNodeAtBeginning(struct DuesPayments *head, struct DuesPayments values)
+{
+	struct DuesPayments *newNode = malloc(sizeof(struct DuesPayments));
+
+	strcpy(newNode->date, values.date);
+	strcpy(newNode->client, values.client);
+	newNode->amount = values.amount;
+	newNode->next = NULL;
+
+	newNode->next = head;
+	head = newNode;
+
+	return (head);
+}
+
 /** Count nodes */
 int countNodes(struct DuesPayments *head)
 {
