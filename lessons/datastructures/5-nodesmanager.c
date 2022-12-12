@@ -21,7 +21,7 @@ struct DuesPayments *addNewNodeAtEnd(struct DuesPayments **head, struct DuesPaym
        
 	new = *head;
 	
-	*temp = malloc(sizeof(struct DuesPayments));
+	temp = malloc(sizeof(struct DuesPayments));
 	if (!temp)
 		return (NULL);
 
@@ -32,7 +32,7 @@ struct DuesPayments *addNewNodeAtEnd(struct DuesPayments **head, struct DuesPaym
 
 	if (*head == NULL)
 	{
-		head->next = temp;
+		*head = temp;
 		return (temp);
 	}
 

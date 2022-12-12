@@ -31,15 +31,15 @@ int main(void)
 	scanf("%f", &records.amount);
 
 	/* add new node */
-	addNewNodeAtEnd(&head, records);
+	ptr = addNewNodeAtEnd(&head, records);
 
 	/* count nodes */
-	nodes = countNodes(head);
+	nodes = countNodes(ptr);
 
 	/* print linked list */
-	printLinkedList(head, nodes);
+	printLinkedList(ptr, nodes);
 
-	free(head);
+	free(ptr);
 
 	return (0);
 }
