@@ -22,6 +22,27 @@ int main(void)
 	return (0);
 }
 
+
+/**
+ * addDataAtEnd - add data at the end of an array
+ * @records - the array of data
+ * @freePos - the empty index position
+ * @value: the data to add to the array
+ *
+ * Description: this function adds a new data to the end of
+ * an array of data
+ *
+ * Return: the array of data
+ */
+
+int addDataAtEnd(int records[], int freePos, int value)
+{
+	records[freePos] = value;
+	freePos++;
+
+	return (freePos);
+}
+
 /** 
  * addDataAtBeginning - add data at the beginning of an array
  * @records - the array of data
