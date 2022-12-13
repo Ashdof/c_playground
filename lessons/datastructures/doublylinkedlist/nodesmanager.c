@@ -50,3 +50,35 @@ struct Node *createNewNode(struct Node *head, int value)
 	head = newNode;
 	return (head);
 }
+
+
+/**
+ * addNewNodeAtEnd - add a new node
+ * @head: a reference to the linked list
+ * @value: the data to add to the node
+ *
+ * Description: this function adds a new node at the end of
+ * a doubly linked list
+ *
+ * Return: a reference to the new linked list
+ */
+
+struct Node *addNewNodeAtEnd(struct Node *head, int value)
+{
+	struct Node *newNode, *temp;
+       
+	newNode = malloc(sizeof(struct Node));
+
+	newNode->prev = NULL;
+	newNode->data = value;
+	newNode->next = NULL;
+
+	temp = head;
+	while (temp->next != NULL)
+		temp = temp->next;
+
+	temp->next = newNode;
+	newNode->prev = temp;
+
+	return (head);
+}

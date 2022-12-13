@@ -11,14 +11,20 @@
 int main(void)
 {
 	struct Node *ptr, *head = NULL;
-	int year;
+	int year, year1;
 
 	head = createNewNode(head, 1990);
 	
-	printf("Enter year: ");
+	printf("Current data in node: %d\n", 1990);
+	
+	printf("Enter previous year: ");
 	scanf("%d", &year);
 
+	printf("Enter next year: ");
+	scanf("%d", &year1);
+
 	head = addNewNodeAtBeginning(head, year);
+	head = addNewNodeAtEnd(head, year1);
 	ptr = head;
 
 	while (ptr != NULL)
