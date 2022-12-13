@@ -11,7 +11,7 @@
 int main(void)
 {
 	struct Node *ptr, *head = NULL;
-	int year, year1;
+	int year, year1, year2, pos = 2;
 
 	head = createNewNode(head, 1990);
 	
@@ -23,8 +23,12 @@ int main(void)
 	printf("Enter next year: ");
 	scanf("%d", &year1);
 
+	printf("Enter skipped year: ");
+	scanf("%d", &year2);
+
 	head = addNewNodeAtBeginning(head, year);
 	head = addNewNodeAtEnd(head, year1);
+	head = addNewNodeAfterPosition(head, year2, pos);
 	ptr = head;
 
 	while (ptr != NULL)

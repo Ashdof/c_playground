@@ -82,3 +82,48 @@ struct Node *addNewNodeAtEnd(struct Node *head, int value)
 
 	return (head);
 }
+
+
+/**
+ * addNewNodeAfterPosition - add a new node
+ * @head: a reference to the linked list
+ * @value: the data to add to the node
+ * @position: the index to add the new node to the linked list
+ *
+ * Description: this function adds a new node after a given index
+ * position of a doubly linked list
+ *
+ * Return: a reference to the new doubly linked list
+ */
+
+struct Node *addNewNodeAfterPosition(struct Node *head, int value, int pos)
+{
+	struct Node *newNode, *temp, *temp2;
+
+	temp = head;
+	newNode = temp2 = NULL;
+
+	newNode = createNewNode(head, value);
+
+	while (pos != 1)
+	{
+		temp = temp->next;
+		pos--;
+	}
+
+	if (temp->next == NULL)
+	{
+		temp->next = newNode;
+		newNode = temp;
+	}
+	else
+	{
+		temp2 = temp->next;
+		temp->next = newNode;
+		temp2->prev = newNode;
+		newNode->next = temp2;
+		temp2->prev = temp;
+	}
+
+	return (head);
+}

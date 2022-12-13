@@ -15,5 +15,6 @@ struct Node
 struct Node *createNewNode(struct Node *head, int value);
 struct Node *addNewNodeAtEnd(struct Node *head, int value);
 struct Node *addNewNodeAtBeginning(struct Node *head, int value);
+struct Node *addNewNodeAfterPosition(struct Node *head, int value, int pos);
 
 #endif /* LISTS_H */
