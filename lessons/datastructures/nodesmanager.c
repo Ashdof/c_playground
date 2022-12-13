@@ -79,7 +79,7 @@ void addNodeAtBeginning(struct DuesPayments **head, struct DuesPayments values)
 /** add a new node at a given index position */
 void addNodeAtGivenIndex(struct DuesPayments *head, struct DuesPayments values, int index)
 {
-	struct DUesPayments *newNode, *ptr;
+	struct DuesPayments *newNode, *ptr;
 
 	newNode = malloc(sizeof(struct DuesPayments));
 	strcpy(newNode->date, values.date);
