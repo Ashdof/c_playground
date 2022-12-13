@@ -34,6 +34,8 @@ int main(void)
 	}
 
 	printf("NULL\n");
+	
+	free(ptr);
 
 	return (0);
 }
