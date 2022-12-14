@@ -14,6 +14,7 @@ struct DuesPayments
 };
 
 int countNodes(struct DuesPayments *head);
+struct DuesPayments *deleteLinkedList(struct DuesPayments *head);
 void printLinkedList(struct DuesPayments *head, int numberOfNodes);
 struct DuesPayments *constructLinkedList(struct DuesPayments values, int number);
 void addNodeAtBeginning(struct DuesPayments **head, struct DuesPayments values);

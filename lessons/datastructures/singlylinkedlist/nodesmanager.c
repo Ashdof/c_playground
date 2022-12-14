@@ -1,4 +1,5 @@
 #include "lists.h"
+#include <stdlib.h>
 
 /** Create a new node */
 void push(struct DuesPayments **head, char datePaid[], char clientName[], float amountPaid)
@@ -89,8 +90,8 @@ void addNodeAtGivenIndex(struct DuesPayments *head, struct DuesPayments values, 
 
 	if (index == 0)
 	{
-		newNode->next = *head;
-		*head = newNode;
+		newNode->next = head;
+		head = newNode;
 	}
 
 	index--;
@@ -148,6 +149,30 @@ struct DuesPayments *constructLinkedList(struct DuesPayments values, int number)
 
 	for (i = number - 1; i >= 0; i--)
 		push(&head, values.date, values.client, values.amount);
+
+	return (head);
+}
+
+
+/**
+ * deleteLinkedList - delete a linked list
+ * @head: a reference to the linked list
+ *
+ * Description: this function deletes an entire singly linked list
+ *
+ * Return: NULL
+ */
+
+struct DuesPayments *deleteLinkedList(struct DuesPayments *head)
+{
+	struct DuesPayments *temp = head;
+
+	while (temp != NULL)
+	{
+		temp = temp->next;
+		free(head);
+		head = temp;
+	}
 
 	return (head);
 }
