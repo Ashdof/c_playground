@@ -34,7 +34,7 @@ struct DuesPayments *addNewNodeAtEnd(struct DuesPayments **head, struct DuesPaym
 	if (*head == NULL)
 	{
 		*head = temp;
-		return (temp);
+		return (*head);
 	}
 
 	while (new->next)
@@ -42,7 +42,7 @@ struct DuesPayments *addNewNodeAtEnd(struct DuesPayments **head, struct DuesPaym
 
 	new->next = temp;
 
-	return (temp);
+	return (*head);
 }
 
 
@@ -173,6 +173,35 @@ struct DuesPayments *deleteLinkedList(struct DuesPayments *head)
 		free(head);
 		head = temp;
 	}
+
+	return (head);
+}
+
+
+/**
+ * reverseLinkedList - reverses the nodes in a linked list
+ * @head: a reference to the linked list
+ *
+ * Description: this function reverses the nodes in a singly linked
+ * list
+ *
+ * Return: a reference to the reversed linked list
+ */
+
+struct DuesPayments *reverseLinkedList(struct DuesPayments *head)
+{
+	struct DuesPayments *nextNode = NULL;
+	struct DuesPayments *prevNode = NULL;
+
+	while (head != NULL)
+	{
+		nextNode = head->next;
+		head->next = prevNode;
+		prevNode = head;
+		head = nextNode;
+	}
+
+	head = prevNode;
 
 	return (head);
 }
