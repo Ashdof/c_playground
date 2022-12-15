@@ -12,6 +12,7 @@ struct Node
 };
 
 void printLinkedList(struct Node *head);
+struct Node *deleteLastNode(struct Node *head);
 struct Node *deleteFirstNode(struct Node *head);
 
 struct Node *createDoublyLinkedList(struct Node *head);

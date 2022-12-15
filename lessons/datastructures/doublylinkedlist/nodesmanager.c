@@ -201,3 +201,30 @@ void printLinkedList(struct Node *head)
 
 	printf("NULL\n");
 }
+
+
+/**
+ * deleteLastNode - delete the last node
+ * @head: a reference to the first node of the linked list
+ *
+ * Description: this function deletes the last node of the linked
+ * list
+ *
+ * Return: a reference to the new linked list
+ */
+
+struct Node *deleteLastNode(struct Node *head)
+{
+	struct Node *ptr, *temp;
+
+	ptr = head;
+	while(ptr->next != NULL)
+		ptr = ptr->next;
+
+	temp = ptr->prev;
+	temp->next = NULL;
+	free(ptr);
+	ptr = NULL;
+
+	return (head);
+}
