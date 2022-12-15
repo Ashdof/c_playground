@@ -228,3 +228,37 @@ struct Node *deleteLastNode(struct Node *head)
 
 	return (head);
 }
+
+
+/**
+ * deleteIntermediateNode - deletes a node at the given index position
+ * @head: reference to the first node of the linked list
+ * @n: the index position to delete the node
+ *
+ * Description: given an index position, this function traverses
+ * the nodes of a linked list to the node indicated by the index
+ * value and deletes it
+ *
+ * Return: a reference to the new linked list
+ */
+
+struct Node *deleteIntermediateNode(struct Node *head, int n)
+{
+	struct Node *ptr, *temp;
+	int i = 0;
+
+	ptr = head;
+	while (i < n - 1)
+	{
+		ptr = ptr->next;
+		i++;
+	}
+
+	temp = ptr->prev;
+	temp->next = ptr->next;
+	ptr->next->prev = temp->next;
+	free(ptr);
+	ptr = NULL;
+
+	return (head);
+}
