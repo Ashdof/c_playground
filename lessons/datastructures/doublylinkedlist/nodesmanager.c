@@ -121,3 +121,37 @@ struct Node *addNewNodeAfterPosition(struct Node *head, int value, int pos)
 
 	return (head);
 }
+
+
+/**
+ * createDoublyLinkedList - create an entire doubly linked list
+ * @head: a reference to the linked list
+ *
+ * Description: this function creates an entire linked list
+ *
+ * Return: a reference to the first node of the linked list
+ */
+
+struct Node *createDoublyLinkedList(struct Node *head)
+{
+	int numOfNodes, value, i;
+
+	printf("Number of nodes to create: ");
+	scanf("%d", &numOfNodes);
+
+	if (numOfNodes == 0)
+		return (head);
+
+	printf("Value for node 1: ");
+	scanf("%d", &value);
+	head = createNewNode(head, value);
+
+	for (i = 1; i < numOfNodes; i++)
+	{
+		printf("Enter value %d: ", i+1);
+		scanf("%d", &value);
+		head = addNewNodeAtEnd(head, value);
+	}
+
+	return (head);
+}
