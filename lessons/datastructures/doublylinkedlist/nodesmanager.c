@@ -1,4 +1,5 @@
 #include "lists.h"
+#include <stdlib.h>
 
 
 /**
@@ -154,4 +155,49 @@ struct Node *createDoublyLinkedList(struct Node *head)
 	}
 
 	return (head);
+}
+
+
+/**
+ * deleteFirstNode - deletes the first node
+ * @head: a reference to the first node of the list
+ *
+ * Description: this function deletes the first node of the linked
+ * list
+ *
+ * Return: a reference pointer to the new linked list
+ */
+
+struct Node *deleteFirstNode(struct Node *head)
+{
+	struct Node *ptr = head;
+	head = head->next;
+	free(ptr);
+	head->prev = NULL;
+
+	return (head);
+}
+
+
+/**
+ * printLinkedList - print a linked list
+ * @head: a reference to the first node of the linked list
+ *
+ * Description: this function prints all the elements of a doubly
+ * linked list
+ *
+ * Return: void
+ */
+
+void printLinkedList(struct Node *head)
+{
+	struct Node *ptr = head;
+
+	while (ptr != NULL)
+	{
+		printf("%d -> ", ptr->data);
+		ptr = ptr->next;
+	}
+
+	printf("NULL\n");
 }

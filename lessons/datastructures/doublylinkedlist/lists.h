@@ -11,6 +11,8 @@ struct Node
 	struct Node *next;
 };
 
+void printLinkedList(struct Node *head);
+struct Node *deleteFirstNode(struct Node *head);
 
 struct Node *createDoublyLinkedList(struct Node *head);
 struct Node *createNewNode(struct Node *head, int value);
