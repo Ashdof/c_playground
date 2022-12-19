@@ -125,6 +125,103 @@ struct Node *addNewNodeAfterPosition(struct Node *head, int value, int pos)
 
 
 /**
+ * insert_dnodeint_at_index - insert a new node at a given position
+ * @h: a reference pointer to the head of the linked list
+ * @idx: the position at which the new node should be added
+ * @n: the value to store in the new node
+ *
+ * Description: this function adds a new node at the given index
+ * position. It firsts loops through the list with a 'temp' variable
+ * pointer up to the node occupying the position equivalent to the
+ * specified index. It then creates a new node, loops through the
+ * linked list with a temporary 'ptr' pointer up to the position
+ * where the counter 'i' is equal to the indicated index. At this
+ * point, pointers ptr and temp are pointing to the same node. It
+ * then makes the necessary connections and returns an address to
+ * the new node.
+ *
+ * Return: address to the new node or NULL if it fails
+ */
+
+struct Node *insert_dnodeint_at_index(struct Node **h, unsigned int idx, int n)
+{
+	unsigned int i;
+	struct Node *newNode, *ptr, *temp;
+
+	if (*h == NULL)
+		return (NULL);
+
+	if (idx != 0)
+	{
+		temp = *h;
+
+		for (i = 0; i < idx - 1 && temp != NULL; i++)
+			temp = temp->next;
+
+		if (temp == NULL)
+			return (NULL);
+	}
+
+	newNode = malloc(sizeof(struct Node));
+	if (!newNode)
+		return (NULL);
+	
+	newNode->data = n;
+
+	ptr = *h;
+
+	if (idx == 0)
+	{
+		newNode->prev = NULL;
+		newNode->next = ptr;
+		ptr->prev = newNode;
+		*h = newNode;
+		return (newNode);
+	}
+	else
+	{
+		for (i = 0; ptr != NULL; i++)
+		{
+			ptr = ptr->next;
+		
+			if (i == idx)
+			{
+				newNode->next = temp->next;
+				newNode->prev = temp;
+				temp->next = newNode;
+				
+				return (newNode);
+			}
+		}
+	}
+
+	return (NULL);
+}
+
+
+/**
+ * freeLinkedList - free a linked list
+ * @head: a reference to the head of the linked list
+ *
+ * Description: this function frees a linked list
+ *
+ * Return: void
+ */
+
+void freeLinkedList(struct Node *head)
+{
+	struct Node *ptr = head;
+
+	while (ptr)
+	{
+		ptr = ptr->next;
+		free(head);
+		head = ptr;
+	}
+}
+
+
+/**
  * createDoublyLinkedList - create an entire doubly linked list
  * @head: a reference to the linked list
  *
