@@ -8,8 +8,8 @@
 
 int main(void)
 {
-	struct Ht_item *item_idx;
-	struct HashTable *hashTable;
+	ht_item *item_idx;
+	hash_table *hashTable;
 	int size;
 	char *day, *animal;
 

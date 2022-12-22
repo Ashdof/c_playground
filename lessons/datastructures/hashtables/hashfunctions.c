@@ -39,9 +39,9 @@ unsigned long int hash_func(char *_str)
  * Return: a pointer to the item or NULL if it fails
  */
 
-struct Ht_item *create_item(char *key_item, char *value_item)
+ht_item *create_item(char *key_item, char *value_item)
 {
-	struct Ht_item *item = malloc(sizeof(struct Ht_item));
+	ht_item *item = malloc(sizeof(ht_item));
 	if (item == NULL)
 		return (NULL);
 
@@ -71,17 +71,17 @@ struct Ht_item *create_item(char *key_item, char *value_item)
  * Return: a pointer to the table or NULL if it fails
  */
 
-struct HashTable *create_table(int size)
+hash_table *create_table(int size)
 {
 	int i;
 
-	struct HashTable *table = malloc(sizeof(struct HashTable));
+	hash_table *table = malloc(sizeof(hash_table));
 	if (table == NULL)
 		return (NULL);
 
 	table->size = size;
 	table->count = 0;
-	table->items = calloc(table->size, sizeof(struct Ht_item));
+	table->items = calloc(table->size, sizeof(ht_item));
 
 	if (table->items == NULL)
 		return (NULL);
@@ -103,7 +103,7 @@ struct HashTable *create_table(int size)
  * Return: void
  */
 
-void free_item(struct Ht_item *item)
+void free_item(ht_item *item)
 {
 	free(item->key);
 	free(item->value);
@@ -121,9 +121,9 @@ void free_item(struct Ht_item *item)
  * Return: void
  */
 
-void free_table(struct HashTable *table)
+void free_table(hash_table *table)
 {
-	struct Ht_item *item;
+	ht_item *item;
 	int i;
 
 	for (i = 0; i < table->size; i++)
@@ -136,3 +136,38 @@ void free_table(struct HashTable *table)
 	free(table->items);
 	free(table);
 }
+
+
+/**
+ * handle_collision - handle collisions in hash table
+ * @table: a reference to the hash table
+ * @item: a pointer to the item
+ *
+ * Description:this function handles cases which result in collisions
+ * in a hash table
+ *
+ * Return: void
+ *
+
+void handle_collision(hash_table *table, ht_item *item)
+{
+}
+
+
+**
+ * insert_table - insert data into hash table
+ * @table: a reference to the hash table
+ * @key_element: the element used as key
+ * @value_element: the element used as value
+ *
+ * Description: this function inserts a data in the form {key: value}
+ * into a hash table
+ *
+ * Return: 1 on success, or 0 on failure
+ *
+
+int insert_table(hash_table *table, char *key_element, char *value_element)
+{
+	* create a new item *
+	ht_item 
+}*/

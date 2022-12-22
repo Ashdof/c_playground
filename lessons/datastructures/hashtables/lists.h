@@ -12,11 +12,11 @@
  * table items
  */
 
-struct Ht_item
+typedef struct Ht_item
 {
 	char *key;
 	char *value;
-};
+}ht_item;
 
 /**
  * HashTable - define a hash table
@@ -24,20 +24,20 @@ struct Ht_item
  * Description: this struct defines hash table
  */
 
-struct HashTable
+typedef struct HashTable
 {
 	struct Ht_item **items;	/* a reference pointer to the items */
 	int size;		/* size of the hash table */
 	int count;		/* number of elements in the hash table */
-};
+}hash_table;
 
 
 /* list of prototypes */
 
-void free_item(struct Ht_item *item);
-void free_table(struct HashTable *table);
-struct HashTable *create_table(int size);
+void free_item(ht_item *item);
+void free_table(hash_table *table);
+hash_table *create_table(int size);
 unsigned long int hash_func(char *_str);
-struct Ht_item *create_item(char *key_item, char *value_item);
+ht_item *create_item(char *key_item, char *value_item);
 
 #endif /* LISTS_H */ 
