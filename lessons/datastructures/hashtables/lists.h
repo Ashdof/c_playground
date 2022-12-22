@@ -34,6 +34,8 @@ typedef struct HashTable
 
 /* list of prototypes */
 
+void free_item(ht_item *item);
+void free_table(hashTable *table);
 hashTable *create_table(int size);
 unsigned long int hash_func(char *_str);
 ht_item *create_item(char *key_item, char *value_item);

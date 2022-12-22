@@ -91,3 +91,47 @@ hashTable *create_table(int size)
 
 	return (table);
 }
+
+
+/**
+ * free_item - free memory allocated to item
+ * @item: a pointer to the item to free its memory
+ *
+ * Description: this function frees up the memory used by an item
+ * after it has been utilised
+ *
+ * Return: void
+ */
+
+void free_item(ht_item *item)
+{
+	free(item->key);
+	free(item->value);
+	free(item);
+}
+
+
+/**
+ * free_table - free memory allocated to the hash table
+ * @table: a reference to the table
+ *
+ * Description: this function frees up the memory used by a hash
+ * table
+ *
+ * Return: void
+ */
+
+void free_table(hashTable *table)
+{
+	int i;
+
+	for (i = 0; i < table->size; i++)
+	{
+		ht_item *item = table->items[i];
+		if (item != NULL)
+			free(item);
+	}
+
+	free(table->items);
+	free(table);
+}
