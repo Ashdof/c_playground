@@ -147,14 +147,14 @@ void free_table(hash_table *table)
  * in a hash table
  *
  * Return: void
- *
+ */
 
 void handle_collision(hash_table *table, ht_item *item)
 {
 }
 
 
-**
+/**
  * insert_table - insert data into hash table
  * @table: a reference to the hash table
  * @key_element: the element used as key
@@ -164,10 +164,43 @@ void handle_collision(hash_table *table, ht_item *item)
  * into a hash table
  *
  * Return: 1 on success, or 0 on failure
- *
+ */
 
 int insert_table(hash_table *table, char *key_element, char *value_element)
 {
-	* create a new item *
-	ht_item 
-}*/
+	ht_item *item, *cur_item;
+       
+	/* create a new item */
+	item = create_item(key_element, value_element);
+	cur_item = table->items[index];
+
+	if (cur_item == NULL) /* key does not exist */
+	{
+		if (table->count == table->size)  /* table is full */
+		{
+			printf("InsertError: hash table is full\n");
+			return;
+		}
+
+		/* insert into table */
+		table->items[index] = item;
+		table->count++;
+	}
+	else	/* key exists */
+	{
+		if (strcmp(cur_item->key, key_element) == 0)
+		{
+			/* scenario 1: only update values */
+			strcpy(table->items[index]->value, value_element);
+			return;
+		}
+		else
+		{
+			/* scenario 2: handle collision */
+			handle_collision(table, item);
+			return;
+
+		}
+	}
+
+}
