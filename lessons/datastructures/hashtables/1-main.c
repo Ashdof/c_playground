@@ -9,10 +9,13 @@
 int main(void)
 {
 	struct Ht_item *item_idx;
+	struct HashTable *hashTable;
+	int size;
 	char *day, *animal;
 
 	day = "Monday";
 	animal = "Dog";
+	size = 5;
 
 	item_idx = create_item(day, animal);
 
@@ -21,8 +24,18 @@ int main(void)
 	else
 		printf("[%s] item created successfully ...\n", day);
 
+	hashTable = create_table(size);
+
+	if (hashTable == NULL)
+		printf("[%s] table failed to create ...\n", day);
+	else
+		printf("[%s] table created successfully ...\n", day);
+
 	free_item(item_idx);
-	printf("Memory allocated to [%s] freed successfully.\n", day);
+	printf("Memory allocated to [%s] item freed successfully.\n", day);
+	
+	free_table(hashTable);
+	printf("Memory allocated to [%s] table freed successfully.\n", day);
 
 	return (0);
 }
