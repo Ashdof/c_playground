@@ -58,3 +58,36 @@ ht_item *create_item(char *key_item, char *value_item)
 
 	return (item);
 }
+
+
+/**
+ * create_table - create a hash table
+ * @size: an integer value that denotes the size of the table
+ *
+ * Description: this function creates a hash table and allocates
+ * memory according to the size of the hash table struct and
+ * intialise each table value to NULL
+ *
+ * Return: a pointer to the table or NULL if it fails
+ */
+
+hashTable *create_table(int size)
+{
+	int i;
+
+	hashTable *table = malloc(sizeof(hashTable));
+	if (table == NULL)
+		return (NULL);
+
+	table->size = size;
+	table->count = 0;
+	table->items = calloc(table->size, sizeof(ht_item));
+
+	if (table->items == NULL)
+		return (NULL);
+
+	for (i = 0; i < table->size; i++)
+		table->items[i] = NULL;
+
+	return (table);
+}
