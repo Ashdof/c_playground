@@ -2,8 +2,8 @@
 #define LISTS_H
 
 #include <stdio.h>
-#include "hashfunctions.c"
-
+#include <stdlib.h>
+#include <string.h>
 
 /**
  * Ht_item - define an item for the hash table
@@ -12,11 +12,11 @@
  * table items
  */
 
-typedef struct Ht_item
+struct Ht_item
 {
 	char *key;
 	char *value;
-}ht_item;
+};
 
 /**
  * HashTable - define a hash table
@@ -24,20 +24,20 @@ typedef struct Ht_item
  * Description: this struct defines hash table
  */
 
-typedef struct HashTable
+struct HashTable
 {
-	ht_item **items;	/* a reference pointer to the items */
+	struct Ht_item **items;	/* a reference pointer to the items */
 	int size;		/* size of the hash table */
 	int count;		/* number of elements in the hash table */
-}hashTable;
+};
 
 
 /* list of prototypes */
 
-void free_item(ht_item *item);
-void free_table(hashTable *table);
-hashTable *create_table(int size);
+void free_item(struct Ht_item *item);
+void free_table(struct HashTable *table);
+struct HashTable *create_table(int size);
 unsigned long int hash_func(char *_str);
-ht_item *create_item(char *key_item, char *value_item);
+struct Ht_item *create_item(char *key_item, char *value_item);
 
 #endif /* LISTS_H */ 

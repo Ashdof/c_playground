@@ -39,9 +39,9 @@ unsigned long int hash_func(char *_str)
  * Return: a pointer to the item or NULL if it fails
  */
 
-ht_item *create_item(char *key_item, char *value_item)
+struct Ht_item *create_item(char *key_item, char *value_item)
 {
-	ht_item *item = malloc(sizeof(ht_item));
+	struct Ht_item *item = malloc(sizeof(struct Ht_item));
 	if (item == NULL)
 		return (NULL);
 
@@ -71,17 +71,17 @@ ht_item *create_item(char *key_item, char *value_item)
  * Return: a pointer to the table or NULL if it fails
  */
 
-hashTable *create_table(int size)
+struct HashTable *create_table(int size)
 {
 	int i;
 
-	hashTable *table = malloc(sizeof(hashTable));
+	struct HashTable *table = malloc(sizeof(struct HashTable));
 	if (table == NULL)
 		return (NULL);
 
 	table->size = size;
 	table->count = 0;
-	table->items = calloc(table->size, sizeof(ht_item));
+	table->items = calloc(table->size, sizeof(struct Ht_item));
 
 	if (table->items == NULL)
 		return (NULL);
@@ -103,7 +103,7 @@ hashTable *create_table(int size)
  * Return: void
  */
 
-void free_item(ht_item *item)
+void free_item(struct Ht_item *item)
 {
 	free(item->key);
 	free(item->value);
@@ -121,13 +121,14 @@ void free_item(ht_item *item)
  * Return: void
  */
 
-void free_table(hashTable *table)
+void free_table(struct HashTable *table)
 {
+	struct Ht_item *item;
 	int i;
 
 	for (i = 0; i < table->size; i++)
 	{
-		ht_item *item = table->items[i];
+		item = table->items[i];
 		if (item != NULL)
 			free(item);
 	}
