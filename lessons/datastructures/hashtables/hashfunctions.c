@@ -89,6 +89,9 @@ hash_table *create_table(int size)
 	for (i = 0; i < table->size; i++)
 		table->items[i] = NULL;
 
+	/* create an overflow bucket */
+	table->overflow_bucket = create_overflow_bucket(table);
+
 	return (table);
 }
 
@@ -133,6 +136,8 @@ void free_table(hash_table *table)
 			free(item);
 	}
 
+	/* free overflow bucket linked list and its items */
+	free_overflow_buckets(table);
 	free(table->items);
 	free(table);
 }
@@ -149,8 +154,22 @@ void free_table(hash_table *table)
  * Return: void
  */
 
-void handle_collision(hash_table *table, ht_item *item)
+void handle_collision(hash_table *table, unsigned long int index,  ht_item *item)
 {
+	linked_list *head = table->overflow_bucket[index];
+
+	if (head == NULL)
+	{
+		/* bucket does not exist so create new one */
+		head = allocate_memory();
+		head->item = item;
+		table->overflow_bucket[index] = head;
+	}
+	else
+	{
+		/* insert into linked list */
+		table->overflow_bucket[index] = insert_into_linkedlist(head, item);
+	}
 }
 
 
@@ -183,6 +202,7 @@ int insert_table(hash_table *table, char *key_element, char *value_element)
 		if (table->count == table->size)  /* table is full */
 		{
 			printf("InsertError: hash table is full\n");
+			free_item(item);
 			return (0);
 		}
 
@@ -201,7 +221,7 @@ int insert_table(hash_table *table, char *key_element, char *value_element)
 		else
 		{
 			/* scenario 2: handle collision */
-			handle_collision(table, item);
+			handle_collision(table, index, item);
 			/*return;*/
 
 		}
@@ -227,12 +247,19 @@ char *search_table(hash_table *table, char *key)
 {
 	int index = hash_func(key);
 	ht_item *item = table->items[index];
+	linked_list *head = table->overflow_bucket[index];
 
 	/* check all non-NULL items */
-	if (item != NULL)
+	while (item != NULL)
 	{
 		if (strcmp(item->key, key) == 0)
 			return (item->value);
+
+		if (head == NULL)
+			return (NULL);
+
+		item = head->item;
+		head = head->next;
 	}
 
 	return (NULL);
@@ -256,7 +283,7 @@ void print_search(hash_table *table, char *key)
 
 	if((val = search_table(table, key)) == NULL)
 	{
-		printf("Key: %s does not exist\n", key);
+		printf("%s does not exist\n", key);
 		/*return;*/
 	}
 	else
@@ -283,7 +310,23 @@ void print_hashTable(hash_table *table)
 	for (int i = 0; i < table->size; i++)
 	{
 		if (table->items[i])
+		{
 			printf("Index: %d, Key: %s, Value: %s\n", i, table->items[i]->key, table->items[i]->value);
+			
+			if (table->overflow_bucket[i])
+			{
+				printf("=> Overflow Bucket =>");
+				linked_list *head = table->overflow_bucket[i];
+
+				while (head)
+				{
+					printf("Index: %d, Key: %s, Value: %s\n", i, table->items[i]->key, table->items[i]->value);
+					head = head->next;
+				}
+			}
+
+			printf("\n");
+		}
 	}
 
 	printf("------------------------------\n\n");
@@ -298,7 +341,7 @@ void print_hashTable(hash_table *table)
  * Return: a reference to the allocated memory
  */
 
-linked_list allocate_memory()
+static linked_list allocate_memory()
 {
 	linked_list *memory = malloc(sizeof(linked_list));
 	if (!memory)
@@ -350,7 +393,7 @@ linked_list *create_new_node(ht_item *item)
  * Return: a reference to the new linked list or NULL if it fails
  */
 
-linked_list insert_into_linkedlist(linked_list *head, ht_item *item)
+static linked_list insert_into_linkedlist(linked_list *head, ht_item *item)
 {
 	linked_list *newNode, *temp;
 
@@ -390,7 +433,7 @@ linked_list insert_into_linkedlist(linked_list *head, ht_item *item)
  * Return: item of the popped node or NULL if it fails
  */
 
-ht_item *pop_node(linked_list *head)
+static ht_item *pop_node(linked_list *head)
 {
 	if (!head || !head->next)
 		return (NULL);
@@ -423,7 +466,7 @@ ht_item *pop_node(linked_list *head)
  * Return: void
  */
 
-void free_linked_list(linked_list *head)
+static void free_linked_list(linked_list *head)
 {
 	linked_list *ptr = head;
 
@@ -448,7 +491,7 @@ void free_linked_list(linked_list *head)
  * Return: a pointer to the bucket or NULL if it fails
  */
 
-linked_list **create_overflow_bucket(hash_table *table)
+static linked_list **create_overflow_bucket(hash_table *table)
 {
 	linked_list buckets = calloc(table->size, sizeof(linked_list));
 	if (!buckets)
@@ -470,7 +513,7 @@ linked_list **create_overflow_bucket(hash_table *table)
  * Return: void
  */
 
-void free_overflow_buckets(hash_table *table)
+static void free_overflow_buckets(hash_table *table)
 {
 	linked_list **buckets = table->overflow_bucket;
 
@@ -479,7 +522,3 @@ void free_overflow_buckets(hash_table *table)
 
 	free(buckets);
 }
-
-
-/**
- *

@@ -65,5 +65,6 @@ ht_item *create_item(char *key_item, char *value_item);
 linked_list **create_overflow_bucket(hash_table *table);
 linked_list insert_into_linkedlist(linked_list *head, ht_item *item);
 int insert_table(hash_table *table, char *key_element, char *value_element);
+void handle_collision(hash_table *table, unsigned long int index,  ht_item *item);
 
 #endif /* LISTS_H */ 
