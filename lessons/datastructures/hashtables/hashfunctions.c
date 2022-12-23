@@ -233,3 +233,54 @@ char *search_table(hash_table *table, char *key)
 
 	return (NULL);
 }
+
+
+/**
+ * print_search - print a searched item
+ * @table: a reference to the table
+ * @key: a reference to the key
+ *
+ * Description: this function prints the item searched for in the
+ * hash table
+ *
+ * Return: void
+ */
+
+void print_search(hash_table *table, char *key)
+{
+	char *val;
+
+	if((val = search_table(table, key)) == NULL)
+	{
+		printf("Key: %s does not exist\n", key);
+		/*return;*/
+	}
+	else
+	{
+		printf("Key: %s, Value: %s\n", key, val);
+	}
+}
+
+
+/**
+ * print_hashTable - print a hash table
+ * @table: a reference to the table
+ *
+ * Description: this function prints out the contents of a hash
+ * table
+ *
+ * Return: void
+ */
+
+void print_hashTable(hash_table *table)
+{
+	printf("\nHash Table\n------------------------------\n");
+
+	for (i = 0; i < table->size; i++)
+	{
+		if (table->item[i])
+			printf("Index: %d, Key: %s, Value: %s\n", i, table->items[i]->key, table->items[i]->value);
+	}
+
+	printf("------------------------------\n\n");
+}
