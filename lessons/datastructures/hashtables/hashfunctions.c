@@ -204,3 +204,32 @@ int insert_table(hash_table *table, char *key_element, char *value_element)
 	}
 
 }
+
+
+/**
+ * search_table - search a hash table for an item
+ * @table: a pointer to the hash table
+ * @key: the key to search for
+ *
+ * Description: this function searches for a key in a hash table
+ * by comparing the index values of key parameter with all the non -
+ * NULL keys in the hash table. if index exists, it returns the
+ * value, otherise NULL
+ *
+ * Return: value of searched item or NULL on failure
+ */
+
+char *search_table(hash_table *table, char *key)
+{
+	int index = hash_func(key);
+	ht_item *item = table->itens[index];
+
+	/* check all non-NULL items */
+	if (item != NULL)
+	{
+		if (strcmp(item->key, key) == 0)
+			return (item->value);
+	}
+
+	return (NULL);
+}

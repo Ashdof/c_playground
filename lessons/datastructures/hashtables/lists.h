@@ -38,6 +38,7 @@ void free_item(ht_item *item);
 void free_table(hash_table *table);
 hash_table *create_table(int size);
 unsigned long int hash_func(char *_str);
+char *search_table(hash_table *table, char *key);
 ht_item *create_item(char *key_item, char *value_item);
 
 #endif /* LISTS_H */ 
