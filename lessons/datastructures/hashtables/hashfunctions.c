@@ -291,23 +291,23 @@ void print_hashTable(hash_table *table)
 
 
 /**
- * allocate_list - allocate memory to a linked list
+ * allocate_memory - allocate memory to a linked list
  *
  * Description: this function allocates memory to a linked list
  *
  * Return: a reference to the allocated memory
  */
 
-linked_list allocate_list()
+linked_list allocate_memory()
 {
-	linked_list *list = malloc(sizeof(linked_list));
-	if (!list)
+	linked_list *memory = malloc(sizeof(linked_list));
+	if (!memory)
 	{
 		printf("Memory cannot be allocated.\n");
 		return (NULL);
 	}
 
-	return (list);
+	return (memory);
 }
 
 
@@ -315,7 +315,7 @@ linked_list allocate_list()
  * create_new_node - create a new node
  * @item: a reference to the item to stored in the node
  *
- * Description: this function invokes the allocate_list() function
+ * Description: this function invokes the allocate_memory() function
  * to allocate memory, creates a new node, add item to it and return
  * a reference to the new node
  *
@@ -344,13 +344,10 @@ linked_list *create_new_node(ht_item *item)
  * list
  *
  * Description: this function inserts an item into a linked
- * list passed to it as parameters. It creates the node with
- * the item and allocates memory by invoking the allocate_list()
- * function which allocates memory. It then creates a node
- * with the item and returns a pointer to the first node of
- * the linked list
+ * list passed to it as parameters. It invokes the create_new_node
+ * function by passing the item parameter to it.
  *
- * Return: a reference to the new linked list
+ * Return: a reference to the new linked list or NULL if it fails
  */
 
 linked_list insert_into_linkedlist(linked_list *head, ht_item *item)
