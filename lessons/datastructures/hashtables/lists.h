@@ -53,6 +53,7 @@ hash_table *create_table(int size);
 ht_item *pop_node(linked_list *head);
 void print_hashTable(hash_table *table);
 unsigned long int hash_func(char *_str);
+void free_linked_list(linked_list *head);
 
 linked_list *create_new_node(ht_item *item);
 void print_search(hash_table *table, char *key);

@@ -411,3 +411,28 @@ ht_item *pop_node(linked_list *head)
 
 	return (item);
 }
+
+
+/**
+ * free_linked_list - free a singly linked list
+ * @head: a reference to the head of the linked list
+ *
+ * Description: this function frees a linked list and all its
+ * elements
+ *
+ * Return: void
+ */
+
+void free_linked_list(linked_list *head)
+{
+	linked_list *ptr = head;
+
+	while (head)
+	{
+		ptr = ptr->next;
+		free(ptr->item-key);
+		free(ptr->item-value);
+		free(ptr->item);
+		free(ptr);
+	}
+}
