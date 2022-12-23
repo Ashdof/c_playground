@@ -352,12 +352,13 @@ linked_list *create_new_node(ht_item *item)
 
 linked_list insert_into_linkedlist(linked_list *head, ht_item *item)
 {
-	linked_list *newNode;
+	linked_list *newNode, *temp;
 
+	newNode = create_new_node(item);
+	
 	/* create the list if it does not exist */
 	if (!head)
 	{
-		newNode = create_new_node(item);
 		head = newNode;
 
 		return (head);
@@ -365,9 +366,48 @@ linked_list insert_into_linkedlist(linked_list *head, ht_item *item)
 	else if (head->next == NULL)	/* work more on this function. Consider situation whereby the next node is not the last node */
 	{
 		/* the list exists; add the new node to the end of the list*/
-		newNode = create_new_node(item);
 		head->next = newNode;
 
 		return (head);
 	}
+
+	while (temp->next->next)
+		temp = temp->next;
+
+	temp->next = newNode;
+
+	return (head)
+}
+
+
+/**
+ * pop_node - remove the first node from the linked list
+ * @head: a reference to the first node of the linked list
+ *
+ * Description: this function removes the first node of the linked
+ * list and returns the item of the popped node
+ *
+ * Return: item of the popped node or NULL if it fails
+ */
+
+ht_item *pop_node(linked_list *head)
+{
+	if (!head || !head->next)
+		return (NULL);
+
+	linked_list *ptr = head->next;
+	linked_list *temp = head;
+
+	temp->next = NULL;
+	head = ptr;
+
+	ht_item *item = NULL;
+	memcopy(temp->item, item, sizeof(ht_item));
+
+	free(temp->item->key);
+	free(temp->item->value);
+	free(temp->item);
+	free(temp);
+
+	return (item);
 }

@@ -46,18 +46,20 @@ typedef struct LinkedList
 }linked_list;
 
 /* list of prototypes */
-
+linked_list allocate_memory();
 void free_item(ht_item *item);
 void free_table(hash_table *table);
 hash_table *create_table(int size);
-
+ht_item *pop_node(linked_list *head);
 void print_hashTable(hash_table *table);
 unsigned long int hash_func(char *_str);
 
+linked_list *create_new_node(ht_item *item);
 void print_search(hash_table *table, char *key);
 char *search_table(hash_table *table, char *key);
 
 ht_item *create_item(char *key_item, char *value_item);
+linked_list insert_into_linkedlist(linked_list *head, ht_item *item);
 int insert_table(hash_table *table, char *key_element, char *value_element);
 
 #endif /* LISTS_H */ 
