@@ -288,3 +288,89 @@ void print_hashTable(hash_table *table)
 
 	printf("------------------------------\n\n");
 }
+
+
+/**
+ * allocate_list - allocate memory to a linked list
+ *
+ * Description: this function allocates memory to a linked list
+ *
+ * Return: a reference to the allocated memory
+ */
+
+linked_list allocate_list()
+{
+	linked_list *list = malloc(sizeof(linked_list));
+	if (!list)
+	{
+		printf("Memory cannot be allocated.\n");
+		return (NULL);
+	}
+
+	return (list);
+}
+
+
+/**
+ * create_new_node - create a new node
+ * @item: a reference to the item to stored in the node
+ *
+ * Description: this function invokes the allocate_list() function
+ * to allocate memory, creates a new node, add item to it and return
+ * a reference to the new node
+ *
+ * Return: a reference to the newly create node or NULL if it fails
+ */
+
+linked_list *create_new_node(ht_item *item)
+{
+	linked_list *newNode = allocate_memory();
+	if (newNode == NULL)
+	{
+		printf("New node cannot be created.\n");
+		return (NULL);
+	}
+
+	newNode->item = item;
+	newNode->next = NULL;
+
+	return (newNode);
+}
+
+/**
+ * insert_into_linkedlist - insert nodes into linked list
+ * @head: a reference to the first node of the linked list
+ * @item: a reference to the item to insert into the linked
+ * list
+ *
+ * Description: this function inserts an item into a linked
+ * list passed to it as parameters. It creates the node with
+ * the item and allocates memory by invoking the allocate_list()
+ * function which allocates memory. It then creates a node
+ * with the item and returns a pointer to the first node of
+ * the linked list
+ *
+ * Return: a reference to the new linked list
+ */
+
+linked_list insert_into_linkedlist(linked_list *head, ht_item *item)
+{
+	linked_list *newNode;
+
+	/* create the list if it does not exist */
+	if (!head)
+	{
+		newNode = create_new_node(item);
+		head = newNode;
+
+		return (head);
+	}
+	else if (head->next == NULL)	/* work more on this function. Consider situation whereby the next node is not the last node */
+	{
+		/* the list exists; add the new node to the end of the list*/
+		newNode = create_new_node(item);
+		head->next = newNode;
+
+		return (head);
+	}
+}

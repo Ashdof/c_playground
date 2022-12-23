@@ -32,6 +32,19 @@ typedef struct HashTable
 }hash_table;
 
 
+/**
+ * LinkedList- define a linked list
+ *
+ * Description: this struct is used to handle collision in a hash
+ * table
+ */
+
+typedef struct LinkedList
+{
+	ht_item *item;
+	struct LinkedList *next;
+}linked_list;
+
 /* list of prototypes */
 
 void free_item(ht_item *item);
