@@ -26,6 +26,7 @@ typedef struct Ht_item
 
 typedef struct HashTable
 {
+	linked_list **overflow_bucket;
 	struct Ht_item **items;	/* a reference pointer to the items */
 	int size;		/* size of the hash table */
 	int count;		/* number of elements in the hash table */
@@ -60,6 +61,7 @@ void print_search(hash_table *table, char *key);
 char *search_table(hash_table *table, char *key);
 
 ht_item *create_item(char *key_item, char *value_item);
+linked_list **create_overflow_bucket(hash_table *table);
 linked_list insert_into_linkedlist(linked_list *head, ht_item *item);
 int insert_table(hash_table *table, char *key_element, char *value_element);
 

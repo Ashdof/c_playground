@@ -436,3 +436,28 @@ void free_linked_list(linked_list *head)
 		free(ptr);
 	}
 }
+
+
+/**
+ * create_overflow_bucket - create an overflow bucket
+ * @table: a reference to the hash table
+ *
+ * Description: this function creates an overflow bucket, an array
+ * of linked lists
+ *
+ * Return: a pointer to the bucket or NULL if it fails
+ */
+
+linked_list **create_overflow_bucket(hash_table *table)
+{
+	linked_list buckets = calloc(table->size, sizeof(linked_list));
+	if (!buckets)
+		return (NULL);
+
+	for (int i = 0; i < table->size; i++)
+		buckets[i] = NULL;
+
+	return (buckets);
+}
+
+
