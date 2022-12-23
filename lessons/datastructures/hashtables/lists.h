@@ -57,6 +57,7 @@ unsigned long int hash_func(char *_str);
 void free_linked_list(linked_list *head);
 
 linked_list *create_new_node(ht_item *item);
+void free_overflow_buckets(hash_table *table);
 void print_search(hash_table *table, char *key);
 char *search_table(hash_table *table, char *key);
 

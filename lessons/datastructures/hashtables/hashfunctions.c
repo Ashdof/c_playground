@@ -461,3 +461,25 @@ linked_list **create_overflow_bucket(hash_table *table)
 }
 
 
+/**
+ * free_overflow_bucket - free overflow bucket
+ * @table: a reference to the hash table
+ *
+ * Description: this function frees all overflow buckets
+ *
+ * Return: void
+ */
+
+void free_overflow_buckets(hash_table *table)
+{
+	linked_list **buckets = table->overflow_bucket;
+
+	for (int i = 0; i < table->size; i++)
+		free_linked_list(buckets[i]);
+
+	free(buckets);
+}
+
+
+/**
+ *
