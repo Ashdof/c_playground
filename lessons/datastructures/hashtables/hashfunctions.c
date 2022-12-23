@@ -169,11 +169,12 @@ void handle_collision(hash_table *table, ht_item *item)
 int insert_table(hash_table *table, char *key_element, char *value_element)
 {
 	ht_item *item, *cur_item;
+	unsigned long int index = hash_func(key_element);
        
 	/* create a new item */
 	item = create_item(key_element, value_element);
 	if (item == NULL)
-		return (NULL);
+		return (0);
 
 	cur_item = table->items[index];
 
@@ -182,7 +183,7 @@ int insert_table(hash_table *table, char *key_element, char *value_element)
 		if (table->count == table->size)  /* table is full */
 		{
 			printf("InsertError: hash table is full\n");
-			return;
+			return (0);
 		}
 
 		/* insert into table */
@@ -195,13 +196,13 @@ int insert_table(hash_table *table, char *key_element, char *value_element)
 		{
 			/* scenario 1: only update values */
 			strcpy(table->items[index]->value, value_element);
-			return;
+			/*return;*/
 		}
 		else
 		{
 			/* scenario 2: handle collision */
 			handle_collision(table, item);
-			return;
+			/*return;*/
 
 		}
 	}
@@ -225,7 +226,7 @@ int insert_table(hash_table *table, char *key_element, char *value_element)
 char *search_table(hash_table *table, char *key)
 {
 	int index = hash_func(key);
-	ht_item *item = table->itens[index];
+	ht_item *item = table->items[index];
 
 	/* check all non-NULL items */
 	if (item != NULL)
@@ -279,9 +280,9 @@ void print_hashTable(hash_table *table)
 {
 	printf("\nHash Table\n------------------------------\n");
 
-	for (i = 0; i < table->size; i++)
+	for (int i = 0; i < table->size; i++)
 	{
-		if (table->item[i])
+		if (table->items[i])
 			printf("Index: %d, Key: %s, Value: %s\n", i, table->items[i]->key, table->items[i]->value);
 	}
 

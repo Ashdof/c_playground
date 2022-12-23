@@ -27,7 +27,7 @@ int main(void)
 	print_search(hashTable, "4");
 
 	/* print the table */
-	print_table(hashTable);
+	print_hashTable(hashTable);
 
 	/* free memory allocated to the table */
 	free_table(hashTable);

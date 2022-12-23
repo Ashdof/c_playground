@@ -37,10 +37,14 @@ typedef struct HashTable
 void free_item(ht_item *item);
 void free_table(hash_table *table);
 hash_table *create_table(int size);
+
 void print_hashTable(hash_table *table);
 unsigned long int hash_func(char *_str);
+
 void print_search(hash_table *table, char *key);
 char *search_table(hash_table *table, char *key);
+
 ht_item *create_item(char *key_item, char *value_item);
+int insert_table(hash_table *table, char *key_element, char *value_element);
 
 #endif /* LISTS_H */ 
