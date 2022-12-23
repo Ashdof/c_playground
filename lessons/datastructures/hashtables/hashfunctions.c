@@ -341,7 +341,7 @@ void print_hashTable(hash_table *table)
  * Return: a reference to the allocated memory
  */
 
-static linked_list allocate_memory()
+static linked_list *allocate_memory()
 {
 	linked_list *memory = malloc(sizeof(linked_list));
 	if (!memory)
@@ -365,7 +365,7 @@ static linked_list allocate_memory()
  * Return: a reference to the newly create node or NULL if it fails
  */
 
-linked_list *create_new_node(ht_item *item)
+static linked_list *create_new_node(ht_item *item)
 {
 	linked_list *newNode = allocate_memory();
 	if (newNode == NULL)
@@ -393,7 +393,7 @@ linked_list *create_new_node(ht_item *item)
  * Return: a reference to the new linked list or NULL if it fails
  */
 
-static linked_list insert_into_linkedlist(linked_list *head, ht_item *item)
+static linked_list *insert_into_linkedlist(linked_list *head, ht_item *item)
 {
 	linked_list *newNode, *temp;
 
@@ -419,7 +419,7 @@ static linked_list insert_into_linkedlist(linked_list *head, ht_item *item)
 
 	temp->next = newNode;
 
-	return (head)
+	return (head);
 }
 
 
@@ -445,7 +445,7 @@ static ht_item *pop_node(linked_list *head)
 	head = ptr;
 
 	ht_item *item = NULL;
-	memcopy(temp->item, item, sizeof(ht_item));
+	memcpy(temp->item, item, sizeof(ht_item));
 
 	free(temp->item->key);
 	free(temp->item->value);
@@ -473,8 +473,8 @@ static void free_linked_list(linked_list *head)
 	while (head)
 	{
 		ptr = ptr->next;
-		free(ptr->item-key);
-		free(ptr->item-value);
+		free(ptr->item->key);
+		free(ptr->item->value);
 		free(ptr->item);
 		free(ptr);
 	}
@@ -493,8 +493,8 @@ static void free_linked_list(linked_list *head)
 
 static linked_list **create_overflow_bucket(hash_table *table)
 {
-	linked_list buckets = calloc(table->size, sizeof(linked_list));
-	if (!buckets)
+	linked_list **buckets = calloc(table->size, sizeof(linked_list));
+	if (buckets == NULL)
 		return (NULL);
 
 	for (int i = 0; i < table->size; i++)

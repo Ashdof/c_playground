@@ -18,6 +18,21 @@ typedef struct Ht_item
 	char *value;
 }ht_item;
 
+
+/**
+ * LinkedList- define a linked list
+ *
+ * Description: this struct is used to handle collision in a hash
+ * table
+ */
+
+typedef struct LinkedList
+{
+	ht_item *item;
+	struct LinkedList *next;
+}linked_list;
+
+
 /**
  * HashTable - define a hash table
  *
@@ -33,37 +48,26 @@ typedef struct HashTable
 }hash_table;
 
 
-/**
- * LinkedList- define a linked list
- *
- * Description: this struct is used to handle collision in a hash
- * table
- */
-
-typedef struct LinkedList
-{
-	ht_item *item;
-	struct LinkedList *next;
-}linked_list;
 
 /* list of prototypes */
-linked_list allocate_memory();
+
+static linked_list *allocate_memory();
 void free_item(ht_item *item);
 void free_table(hash_table *table);
 hash_table *create_table(int size);
-ht_item *pop_node(linked_list *head);
+static ht_item *pop_node(linked_list *head);
 void print_hashTable(hash_table *table);
 unsigned long int hash_func(char *_str);
-void free_linked_list(linked_list *head);
+static void free_linked_list(linked_list *head);
 
-linked_list *create_new_node(ht_item *item);
-void free_overflow_buckets(hash_table *table);
+static linked_list *create_new_node(ht_item *item);
+static void free_overflow_buckets(hash_table *table);
 void print_search(hash_table *table, char *key);
 char *search_table(hash_table *table, char *key);
 
 ht_item *create_item(char *key_item, char *value_item);
-linked_list **create_overflow_bucket(hash_table *table);
-linked_list insert_into_linkedlist(linked_list *head, ht_item *item);
+static linked_list **create_overflow_bucket(hash_table *table);
+static linked_list *insert_into_linkedlist(linked_list *head, ht_item *item);
 int insert_table(hash_table *table, char *key_element, char *value_element);
 void handle_collision(hash_table *table, unsigned long int index,  ht_item *item);
 
