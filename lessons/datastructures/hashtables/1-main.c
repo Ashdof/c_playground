@@ -1,5 +1,7 @@
 #include "lists.h"
 
+#define CAPACITY 50000  /* size of the hash table */
+
 /**
  * mian - test the code
  *
@@ -8,34 +10,28 @@
 
 int main(void)
 {
-	ht_item *item_idx;
-	hash_table *hashTable;
-	int size;
-	char *day, *animal;
-
-	day = "Monday";
-	animal = "Dog";
-	size = 5;
-
-	item_idx = create_item(day, animal);
-
-	if (item_idx == NULL)
-		printf("[%s] item failed to create ...\n", day);
-	else
-		printf("[%s] item created successfully ...\n", day);
-
-	hashTable = create_table(size);
+	hash_table *hashTable = create_table(CAPACITY);
 
 	if (hashTable == NULL)
-		printf("[%s] table failed to create ...\n", day);
-	else
-		printf("[%s] table created successfully ...\n", day);
+		printf("Table failed to create ...\n");
 
-	free_item(item_idx);
-	printf("Memory allocated to [%s] item freed successfully.\n", day);
-	
+	/* insert into table */
+	insert_table(hashTable, "1", "First address");
+	insert_table(hashTable, "2", "Second address");
+	insert_table(hashTable, "3", "Third address");
+
+	/* print searched items */
+	print_search(hashTable, "1");
+	print_search(hashTable, "2");
+	print_search(hashTable, "3");
+	print_search(hashTable, "4");
+
+	/* print the table */
+	print_table(hashTable);
+
+	/* free memory allocated to the table */
 	free_table(hashTable);
-	printf("Memory allocated to [%s] table freed successfully.\n", day);
+	printf("Memory allocated to table freed successfully.\n");
 
 	return (0);
 }

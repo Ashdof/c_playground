@@ -172,6 +172,9 @@ int insert_table(hash_table *table, char *key_element, char *value_element)
        
 	/* create a new item */
 	item = create_item(key_element, value_element);
+	if (item == NULL)
+		return (NULL);
+
 	cur_item = table->items[index];
 
 	if (cur_item == NULL) /* key does not exist */
