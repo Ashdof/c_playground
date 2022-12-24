@@ -185,7 +185,7 @@ void handle_collision(hash_table *table, unsigned long int index,  ht_item *item
  * Return: 1 on success, or 0 on failure
  */
 
-int insert_table(hash_table *table, char *key_element, char *value_element)
+int insert_into_table(hash_table *table, char *key_element, char *value_element)
 {
 	ht_item *item, *cur_item;
 	unsigned long int index = hash_func(key_element);
@@ -216,13 +216,13 @@ int insert_table(hash_table *table, char *key_element, char *value_element)
 		{
 			/* scenario 1: only update values */
 			strcpy(table->items[index]->value, value_element);
-			/*return;*/
+			return (1);
 		}
 		else
 		{
 			/* scenario 2: handle collision */
 			handle_collision(table, index, item);
-			/*return;*/
+			return (0);
 
 		}
 	}
@@ -344,7 +344,7 @@ void print_hashTable(hash_table *table)
 static linked_list *allocate_memory()
 {
 	linked_list *memory = malloc(sizeof(linked_list));
-	if (!memory)
+	if (memory == NULL)
 	{
 		printf("Memory cannot be allocated.\n");
 		return (NULL);
@@ -400,7 +400,7 @@ static linked_list *insert_into_linkedlist(linked_list *head, ht_item *item)
 	newNode = create_new_node(item);
 	
 	/* create the list if it does not exist */
-	if (!head)
+	if (head == NULL)
 	{
 		head = newNode;
 
@@ -435,7 +435,7 @@ static linked_list *insert_into_linkedlist(linked_list *head, ht_item *item)
 
 static ht_item *pop_node(linked_list *head)
 {
-	if (!head || !head->next)
+	if (head == NULL || head->next == NULL)
 		return (NULL);
 
 	linked_list *ptr = head->next;
