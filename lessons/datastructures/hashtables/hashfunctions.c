@@ -522,3 +522,83 @@ static void free_overflow_buckets(hash_table *table)
 
 	free(buckets);
 }
+
+
+/**
+ * ht_delete - delete from the hash table
+ * @table: a reference to the hash table
+ * @key: the key of the element to delete
+ *
+ * Description: this function deletes an element from the hash
+ * table. It first computes the index by invoking the hash_function()
+ * If the item is null, it does nothing. Other, if after comparing
+ * keys and there is no collision chain for that index, it removes
+ * the item from the table. If collision chain exists, it removes
+ * the element and shifts the link accordingly
+ *
+ * Return: void
+ */
+
+void ht_delete(hash_table *table, char *key)
+{
+	/* get the index of the key */
+	int index = hash_func(key);
+
+	/* get the item at the index */
+	ht_item *item = table->items[index];
+
+	/* get the element from the collision chain */
+	linked_list *head = table->overflow_bucket[index];
+
+	if (item != NULL)
+	{
+
+		if (head == NULL && strcmp(item->key, key) == 0)
+		{
+			/* no collision chain, remove the item and set the head to NULL */
+			table->items[index] = NULL;
+			free_item(item);
+			table_count--;
+		}
+		else if (head != NULL)
+		{
+			/* collision chain exists */
+			if (strcmp(item->key, key) == 0)
+			{
+				/* remove this item and set the head of the list as the new item */
+				free_item(item);
+				linked_list *node = head;
+				head = head->next;
+				node->next = NULL;
+
+				table->items[index] = create_item(node->item->key, node->item->value);
+				free_linkedlist(node);
+				table->overflow_bucket[index] = head;
+			}
+
+			linked_list *cur = head;
+			linked_list prev = NULL;
+
+			while (cur)
+			{
+				if (strcmp(cur->item->key, key) == 0)
+				{
+					/* first, free the element of the chain, then remove the chain */
+					free_linkedlist(head);
+					table_overflow_bucket[index] = NULL;
+				}
+				else
+				{
+					/* this is somewhere in the chain */
+					prev->next = cur->next;
+					cur->next = NULL;
+					free_linkedlist(cur);
+					table->overflow_bucket[index] = head;
+				}
+			}
+
+			cur = cur->next;
+			prev = cur
+		}
+	}
+}
