@@ -558,7 +558,7 @@ void ht_delete(hash_table *table, char *key)
 			/* no collision chain, remove the item and set the head to NULL */
 			table->items[index] = NULL;
 			free_item(item);
-			table_count--;
+			table->count--;
 		}
 		else if (head != NULL)
 		{
@@ -572,33 +572,33 @@ void ht_delete(hash_table *table, char *key)
 				node->next = NULL;
 
 				table->items[index] = create_item(node->item->key, node->item->value);
-				free_linkedlist(node);
+				free_linked_list(node);
 				table->overflow_bucket[index] = head;
 			}
 
 			linked_list *cur = head;
-			linked_list prev = NULL;
+			linked_list *prev = NULL;
 
 			while (cur)
 			{
 				if (strcmp(cur->item->key, key) == 0)
 				{
 					/* first, free the element of the chain, then remove the chain */
-					free_linkedlist(head);
-					table_overflow_bucket[index] = NULL;
+					free_linked_list(head);
+					table->overflow_bucket[index] = NULL;
 				}
 				else
 				{
 					/* this is somewhere in the chain */
 					prev->next = cur->next;
 					cur->next = NULL;
-					free_linkedlist(cur);
+					free_linked_list(cur);
 					table->overflow_bucket[index] = head;
 				}
 			}
 
 			cur = cur->next;
-			prev = cur
+			prev = cur;
 		}
 	}
 }

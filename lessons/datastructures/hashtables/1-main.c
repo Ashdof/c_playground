@@ -34,6 +34,17 @@ int main(void)
 	/* print the table */
 	print_hashTable(hashTable);
 
+	/* delete items from the table */
+	printf("Deletint element of key 1\n");
+	ht_delete(hashTable, "1");
+	printf("Deletint element of key Cau\n");
+    	ht_delete(hashTable, "Cau");
+	printf("Deletint element of key Bel\n");
+	ht_delete(hashTable, "Bel");
+
+	/* print the table */
+	print_hashTable(hashTable);
+	
 	/* free memory allocated to the table */
 	free_table(hashTable);
 	printf("Memory allocated to table freed successfully.\n");
