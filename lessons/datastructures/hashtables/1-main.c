@@ -35,11 +35,13 @@ int main(void)
 	print_hashTable(hashTable);
 
 	/* delete items from the table */
-	printf("Deletint element of key 1\n");
+	printf("Deleting element of key 1\n");
 	ht_delete(hashTable, "1");
-	printf("Deletint element of key Cau\n");
+
+	printf("Deleting element of key Cau\n");
     	ht_delete(hashTable, "Cau");
-	printf("Deletint element of key Bel\n");
+	
+	printf("Deleting element of key Bel\n");
 	ht_delete(hashTable, "Bel");
 
 	/* print the table */
